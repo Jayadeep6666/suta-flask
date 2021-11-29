@@ -62,6 +62,30 @@ def get_some_products():
 
 
 """
+funtion: search:: This function used to search details using id uses method get
+                 and does not take any parameters 
+returns:: This function returns response in json format 
+"""
+@app.route("/products/<id>",methods=["GET"])
+def search(id):
+    try:
+        data=list(register.products.find_one({"_id":ObjectId(id)}))
+        # for attr in dir(data):
+        #     print(f"********{attr}********")
+        for user in data:
+            user['_id'] = str(user["_id"])
+        
+        return Response(response=json.dumps(data),
+    status=500,
+    mimetype="application/json")
+    except Exception as ex:
+        print(ex)
+    return Response(response=json.dumps({"message":"no users found"}),
+    status=500,
+    mimetype="application/json")
+
+
+"""
 funtion: update_some_product:: This function used to update inserted product details uses patch method
                and  take parameters as id 
 returns:: This function returns response in json format and update user
@@ -160,6 +184,30 @@ def get_some_category():
     mimetype="application/json")
 
 
+
+"""
+funtion: search:: This function used to search details using id uses method get
+                 and does not take any parameters 
+returns:: This function returns response in json format 
+"""
+
+@app.route("/categorytable/<id>",methods=["GET"])
+def search(id):
+    try:
+        data=list(register.categorytable.find_one({"_id":ObjectId(id)}))
+        # for attr in dir(data):
+        #     print(f"********{attr}********")
+        for user in data:
+            user['_id'] = str(user["_id"])
+        
+        return Response(response=json.dumps(data),
+    status=500,
+    mimetype="application/json")
+    except Exception as ex:
+        print(ex)
+    return Response(response=json.dumps({"message":"no users found"}),
+    status=500,
+    mimetype="application/json")
 """
 funtion: update_user_category:: This function used to update inserted category details uses patch method
                and take id as parameters 
