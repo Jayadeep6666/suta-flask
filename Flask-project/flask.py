@@ -112,6 +112,22 @@ def categorytable():
         )
     except Exception as ex:
         print(ex)
+
+@app.route("/categorytable",methods=["GET"])
+def get_some_category():
+    try:
+        data=list(region.categorytable.find())
+        for user in data:
+            user['_id'] = str(user["_id"])
         
+        return Response(response=json.dumps(data),
+    status=500,
+    mimetype="application/json")
+    except Exception as ex:
+        print(ex)
+    return Response(response=json.dumps({"message":"cannot read users"}),
+    status=500,
+    mimetype="application/json")
+    
 if __name__ == "__main__":
     app.run(debug="True")
