@@ -35,5 +35,21 @@ def insert_product():
         print(ex)
 
 
+@app.route("/products",methods=["GET"])
+def get_some_products():
+    try:
+        data=list(register.products.find())
+        for user in data:
+            user['_id'] = str(user["_id"])
+        
+        return Response(response=json.dumps(data),
+    status=500,
+    mimetype="application/json")
+    except Exception as ex:
+        print(ex)
+    return Response(response=json.dumps({"message":"cannot read users"}),
+    status=500,
+    mimetype="application/json")
+    
 if __name__ == "__main__":
     app.run(debug="True")
