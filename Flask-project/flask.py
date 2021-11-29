@@ -15,6 +15,11 @@ except:
     print("Error cannot connect to db")
 
 
+"""
+funtion: insert_product:: This function used to insert product details uses post method
+               and does not take any parameters 
+returns:: This function returns response in json format as user created and returns product unique id
+"""
 @app.route("/products",methods=["POST"])
 def insert_product():
     try:
@@ -34,7 +39,11 @@ def insert_product():
     except Exception as ex:
         print(ex)
 
-
+"""
+funtion: get_some_products:: This function used to display inserted product details uses get method
+               and does not take any parameters 
+returns:: This function returns response in json format and display existing users
+"""
 @app.route("/products",methods=["GET"])
 def get_some_products():
     try:
@@ -51,6 +60,12 @@ def get_some_products():
     status=500,
     mimetype="application/json")
 
+
+"""
+funtion: update_some_product:: This function used to update inserted product details uses patch method
+               and  take parameters as id 
+returns:: This function returns response in json format and update user
+"""
 @app.route("/products/<id>",methods=["PATCH"])
 def update_user_product(id):
     try:
@@ -72,7 +87,11 @@ def update_user_product(id):
             status=200,
             mimetype="application/json"
         )
-
+"""
+funtion: delete_user_products:: This function used to delete exusting product details uses delete method
+               and take parameters as id  
+returns:: This function returns response in json format and user deleted with unique id
+"""
 @app.route("/products/<id>",methods=["DELETE"])
 def delete_user_product(id):
     try:
@@ -95,6 +114,11 @@ def delete_user_product(id):
         )
 
 
+"""
+funtion: categorytable:: This function used to  inserted category details uses post method
+               and does not take any parameters 
+returns:: This function returns response in json format and display euser created
+"""
 @app.route("/categorytable",methods=["POST"])
 def categorytable():
     try:
@@ -113,6 +137,12 @@ def categorytable():
     except Exception as ex:
         print(ex)
 
+
+"""
+funtion: get_some_category:: This function used to display inserted category details uses get method
+               and does not take any parameters 
+returns:: This function returns response in json format and display existing users
+"""
 @app.route("/categorytable",methods=["GET"])
 def get_some_category():
     try:
@@ -129,7 +159,12 @@ def get_some_category():
     status=500,
     mimetype="application/json")
 
-    
+
+"""
+funtion: update_user_category:: This function used to update inserted category details uses patch method
+               and take id as parameters 
+returns:: This function returns response in json format and display updated user
+"""   
 @app.route("/categorytable/<id>",methods=["PATCH"])
 def update_user_category(id):
     try:
@@ -153,7 +188,11 @@ def update_user_category(id):
         )
 
     
-
+"""
+funtion: delete_user_category:: This function used to delete inserted category details uses delete method
+               and  take id as parameters 
+returns:: This function returns response in json format and display unique id with message
+"""
 @app.route("/categorytable/<id>",methods=["DELETE"])
 def delete_user_category(id):
     try:
