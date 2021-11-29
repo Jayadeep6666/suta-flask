@@ -93,6 +93,25 @@ def delete_user_product(id):
             status=200,
             mimetype="application/json"
         )
+
+
+@app.route("/categorytable",methods=["POST"])
+def categorytable():
+    try:
+        user={"categoryname":request.form["categoryname"],"categoryimage":request.form["categoryimage"]}
+        dbresponse=region.categorytable.insert_one(user)
+        print(dbresponse.inserted_id)
+        # for attr in dir(dbresponse):
+        #     print(attr)
+        return Response(
+            response=json.dumps(
+                {"message":"user created", 
+                "id":f"{dbresponse.inserted_id}"}),
+            status=200,
+            mimetype="application/json"
+        )
+    except Exception as ex:
+        print(ex)
         
 if __name__ == "__main__":
     app.run(debug="True")
