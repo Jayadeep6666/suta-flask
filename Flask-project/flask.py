@@ -152,6 +152,30 @@ def update_user_category(id):
             mimetype="application/json"
         )
 
-        
+    
+
+@app.route("/categorytable/<id>",methods=["DELETE"])
+def delete_user_category(id):
+    try:
+        dbResponse = region.categorytable.delete_one({"_id":ObjectId(id)})
+        for attr in dir(dbResponse):
+            print(f"****{attr}****")
+        return Response(
+            response=json.dumps(
+                {"message":"user deleted","id":f"{id}"}),
+            status=200,
+            mimetype="application/json"
+        )
+    except Exception as ex:
+        print("ex")
+        return Response(
+            response=json.dumps(
+                {"message":"sorry cannot delete a user"}),
+            status=200,
+            mimetype="application/json"
+        )
+
+
+
 if __name__ == "__main__":
     app.run(debug="True")
