@@ -128,6 +128,30 @@ def get_some_category():
     return Response(response=json.dumps({"message":"cannot read users"}),
     status=500,
     mimetype="application/json")
+
     
+@app.route("/categorytable/<id>",methods=["PATCH"])
+def update_user_category(id):
+    try:
+        dbResponse=region.categorytable.update_one({"_id":ObjectId(id)},{"$set":{"categoryimage":request.form["categoryimage"]}})
+        for attr in dir(dbResponse):
+            print(f"********{attr}********")
+        return Response(
+            response=json.dumps(
+                {"message":"user updated"}),
+            status=200,
+            mimetype="application/json"
+        )
+
+    except Exception as ex:
+        print(ex)
+        return Response(
+            response=json.dumps(
+                {"message":"sorry cannot update user"}),
+            status=200,
+            mimetype="application/json"
+        )
+
+        
 if __name__ == "__main__":
     app.run(debug="True")
